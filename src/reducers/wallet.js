@@ -9,7 +9,7 @@ const INNITIAL_STATE = {
 const wallet = (state = INNITIAL_STATE, action) => {
   switch (action.type) {
   case 'GET_CURRENCIE':
-    return { ...state, currencies: [action.payload] };
+    return { ...state, currencies: action.payload };
   default:
     return state;
   }
