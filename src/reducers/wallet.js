@@ -10,6 +10,18 @@ const wallet = (state = INNITIAL_STATE, action) => {
   switch (action.type) {
   case 'GET_CURRENCIE':
     return { ...state, currencies: action.payload };
+  case 'GET_EXPENSES':
+    return { ...state,
+      expenses: [...state.expenses, {
+        id: (state.expenses.length > 0)
+          ? state.expenses[state.expenses.length - 1].id + 1 : 0,
+        value: action.payload.valueinput,
+        description: action.payload.descriptioninput,
+        currency: action.payload.cambio,
+        method: action.payload.pagamento,
+        tag: action.payload.pagamentocategories,
+        exchangeRates: action.payload.response,
+      }] };
   default:
     return state;
   }
