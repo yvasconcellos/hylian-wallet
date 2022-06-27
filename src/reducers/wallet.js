@@ -22,6 +22,10 @@ const wallet = (state = INNITIAL_STATE, action) => {
         tag: action.payload.pagamentocategories,
         exchangeRates: action.payload.response,
       }] };
+  case 'REMOVE_EXPENSE':
+    return { ...state,
+      expenses: state.expenses
+        .filter((expense) => expense.id !== Number(action.payload)) };
   default:
     return state;
   }

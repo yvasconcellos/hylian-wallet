@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { removeExpense } from '../actions';
 
 class Table extends React.Component {
+  removeItem = (e) => {
+    const { dispatch } = this.props;
+    dispatch(removeExpense(e.target.id));
+  }
+
   render() {
     const cabecalho = [
       'Descrição',
@@ -21,8 +27,8 @@ class Table extends React.Component {
                 {item}
               </th>))}
           </tr>
-          {expenses.map((expense, index) => (
-            <tr key={ index }>
+          {expenses.map((expense) => (
+            <tr key={ expense.id }>
               <td>{expense.description}</td>
               <td>{expense.tag}</td>
               <td>{expense.method}</td>
@@ -44,6 +50,16 @@ class Table extends React.Component {
                 ).toFixed(2)}
               </td>
               <td>Real</td>
+              <td>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ this.removeItem }
+                  id={ expense.id }
+                >
+                  Remover
+                </button>
+              </td>
             </tr>))}
         </tbody>
       </table>
@@ -53,6 +69,7 @@ class Table extends React.Component {
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
