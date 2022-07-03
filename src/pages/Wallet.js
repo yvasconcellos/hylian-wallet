@@ -50,13 +50,11 @@ class Wallet extends React.Component {
     const { cambio, valueinput, descriptioninput,
       pagamento, pagamentocategories } = this.state;
     const { dispatch } = this.props;
-    const response = await fetchAPI();
     dispatch(getEdit({ cambio,
       valueinput,
       descriptioninput,
       pagamento,
       pagamentocategories,
-      response,
     }));
     this.setState({
       cambio: 'USD',
