@@ -21,11 +21,37 @@ const wallet = (state = INNITIAL_STATE, action) => {
         method: action.payload.pagamento,
         tag: action.payload.pagamentocategories,
         exchangeRates: action.payload.response,
-      }] };
+      }],
+      editor: false,
+      idToEdit: 0 };
   case 'REMOVE_EXPENSE':
     return { ...state,
       expenses: state.expenses
         .filter((expense) => expense.id !== Number(action.payload)) };
+  case 'EDIT_EXPENSE':
+    return { ...state,
+      editor: true,
+      idToEdit: action.payload };
+  case 'GET_EDIT':
+
+    return { ...state,
+      editor: false,
+      idToEdit: 0,
+      expenses: state.expenses.map((expense) => {
+        if (expense.id === state.idToEdit) {
+          return {
+            id: expense.id,
+            value: action.payload.valueinput,
+            description: action.payload.descriptioninput,
+            currency: action.payload.cambio,
+            method: action.payload.pagamento,
+            tag: action.payload.pagamentocategories,
+            exchangeRates: expense.exchangeRates,
+          };
+        }
+        return expense;
+      }),
+    };
   default:
     return state;
   }

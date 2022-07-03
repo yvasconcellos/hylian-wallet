@@ -17,7 +17,7 @@ class Table extends React.Component {
       'Valor', 'Moeda', 'Câmbio utilizado',
       'Valor convertido', 'Moeda de conversão', 'Editar/Excluir',
     ];
-    const { expenses } = this.props;
+    const { expenses, editItem, editor } = this.props;
     return (
       <table>
         <tbody>
@@ -50,16 +50,27 @@ class Table extends React.Component {
                 ).toFixed(2)}
               </td>
               <td>Real</td>
-              <td>
-                <button
-                  type="button"
-                  data-testid="delete-btn"
-                  onClick={ this.removeItem }
-                  id={ expense.id }
-                >
-                  Remover
-                </button>
-              </td>
+              { (editor === false) && (
+
+                <td>
+                  <button
+                    type="button"
+                    data-testid="edit-btn"
+                    onClick={ editItem }
+                    id={ expense.id }
+                  >
+                    Editar despesa
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                    onClick={ this.removeItem }
+                    id={ expense.id }
+                  >
+                    Remover
+                  </button>
+                </td>
+              )}
             </tr>))}
         </tbody>
       </table>
@@ -70,10 +81,13 @@ class Table extends React.Component {
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   dispatch: PropTypes.func.isRequired,
+  editItem: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
 });
 
 export default connect(mapStateToProps, null)(Table);
