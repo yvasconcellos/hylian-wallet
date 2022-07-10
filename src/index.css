@@ -4,6 +4,14 @@ body {
   background-color: rgb(243, 243, 243);
 }
 
+header {
+  background-color: rgba(100, 197, 92, 0.54);
+}
+
+.formInput {
+  background-color: rgba(255, 238, 163, 0.9);
+}
+
 .bgSide {
   background-image: url('./images/hyrule.png');
   background-size: cover;
@@ -14,20 +22,30 @@ body {
   flex-direction: column;
 }
 
-p {
+.text-login {
   font-family: 'Handjet', sans-serif;
   text-shadow:rgb(66, 66, 66) -1px 1px 7px
 
 }
 
-button {
+.button-login {
+  background-color: #474747;
   transition: 0.7s;
+  color: white;
 }
 
-button:hover {
-  background-color: rgb(247, 247, 247);
+.button-login:hover {
   filter: drop-shadow(0px 3px 5px #c0c0c0);
-  transform: scale(1.05); 
+  transform: scale(1.08); 
+}
+
+.button-form {
+  transition: 0.5s;
+}
+
+.button-form:hover {
+  filter: drop-shadow(0px 3px 5px #c0c0c0);
+  transform: scale(1.08); 
 }
 
 .title {
@@ -35,7 +53,11 @@ button:hover {
   
 }
 
-input {
+.input-login {
   background-color: rgb(243, 243, 243);
   border-bottom: 1px solid rgb(121, 121, 121);
+}
+
+tr:nth-child(even) {
+  background:lightgray;
 }

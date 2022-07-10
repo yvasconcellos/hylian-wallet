@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removeExpense } from '../actions';
+import remove from '../images/delete.png';
+import edit from '../images/edit.png';
 
 class Table extends React.Component {
   removeItem = (e) => {
@@ -11,66 +13,80 @@ class Table extends React.Component {
 
   render() {
     const cabecalho = [
-      'Descrição',
-      'Tag',
-      'Método de pagamento',
-      'Valor', 'Moeda', 'Câmbio utilizado',
-      'Valor convertido', 'Moeda de conversão', 'Editar/Excluir',
+      'Description',
+      'Category',
+      'Payment',
+      'Count', 'Currency', 'Exchange',
+      'Value', 'Local Currency', '',
     ];
     const { expenses, editItem, editor } = this.props;
     return (
-      <table>
+      <table className="table-auto">
         <tbody>
-          <tr>
+          <tr className="flex justify-around my-2 ">
             {cabecalho.map((item) => (
-              <th key={ item }>
+              <th
+                key={ item }
+                className="w-1/12 text-center self-center"
+              >
                 {item}
               </th>))}
           </tr>
+          <hr className="w-screen mb-2" />
           {expenses.map((expense) => (
-            <tr key={ expense.id }>
-              <td>{expense.description}</td>
-              <td>{expense.tag}</td>
-              <td>{expense.method}</td>
-              <td>{Number(expense.value).toFixed(2)}</td>
-              <td>
+            <tr key={ expense.id } className="flex justify-around my-1">
+              <td className="w-1/12 text-center text-sm">{expense.description}</td>
+              <td className="w-1/12 text-center text-sm">{expense.tag}</td>
+              <td className="w-1/12 text-center text-sm">{expense.method}</td>
+              <td className="w-1/12 text-center text-sm">
+                {Number(expense.value).toFixed(2)}
+              </td>
+              <td className="w-1/12 text-center text-sm">
                 {(
                   expense.exchangeRates[expense.currency].name)
                   .replace('/Real Brasileiro', '')}
               </td>
-              <td>
+              <td className="w-1/12 text-center text-sm">
                 {parseFloat(
                   expense.exchangeRates[expense.currency].ask,
                 ).toFixed(2)}
               </td>
-              <td>
+              <td className="w-1/12 text-center text-sm">
                 {parseFloat(
                   expense.exchangeRates[expense.currency].ask
                 * expense.value,
                 ).toFixed(2)}
               </td>
-              <td>Real</td>
-              { (editor === false) && (
+              <td className="w-1/12 text-center text-sm">Real</td>
 
-                <td>
-                  <button
-                    type="button"
-                    data-testid="edit-btn"
-                    onClick={ editItem }
+              <td className="w-1/12 text-center text-sm">
+                <button
+                  type="button"
+                  data-testid="edit-btn"
+                  onClick={ editItem }
+                  disabled={ editor }
+                >
+                  <img
+                    src={ edit }
+                    alt="Edit"
                     id={ expense.id }
-                  >
-                    Editar despesa
-                  </button>
-                  <button
-                    type="button"
-                    data-testid="delete-btn"
-                    onClick={ this.removeItem }
+                    className="w-5"
+                  />
+                </button>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ this.removeItem }
+                  disabled={ editor }
+                >
+                  <img
+                    src={ remove }
+                    alt="Remove"
                     id={ expense.id }
-                  >
-                    Remover
-                  </button>
-                </td>
-              )}
+                    className="w-5"
+                  />
+                </button>
+              </td>
             </tr>))}
         </tbody>
       </table>

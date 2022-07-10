@@ -1,15 +1,18 @@
+/* eslint-disable jsx-quotes */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { editExpense, fetchAPI, getCurrencies, getEdit, getExpenses } from '../actions';
 import Table from './Table';
+import triforce from '../images/triforce.png';
+import addIcon from '../images/icon-add.png';
 
-const alimentacao = 'Alimentação';
+const alimentacao = 'Food';
 
 class Wallet extends React.Component {
   state = {
     cambio: 'USD',
-    valueinput: 0,
+    valueinput: '',
     descriptioninput: '',
     pagamento: 'Dinheiro',
     pagamentocategories: alimentacao,
@@ -39,7 +42,7 @@ class Wallet extends React.Component {
     }));
     this.setState({
       cambio: 'USD',
-      valueinput: 0,
+      valueinput: '',
       descriptioninput: '',
       pagamento: 'Dinheiro',
       pagamentocategories: alimentacao,
@@ -58,7 +61,7 @@ class Wallet extends React.Component {
     }));
     this.setState({
       cambio: 'USD',
-      valueinput: 0,
+      valueinput: '',
       descriptioninput: '',
       pagamento: 'Dinheiro',
       pagamentocategories: alimentacao,
@@ -93,40 +96,72 @@ class Wallet extends React.Component {
       descriptioninput, pagamento,
       pagamentocategories } = this.state;
     return (
-      <>
-        <header>
-          <p data-testid="email-field">{ email }</p>
-          <p data-testid="total-field">{parseFloat(this.somaTotal()).toFixed(2)}</p>
-          <p data-testid="header-currency-field">BRL</p>
+      <div className=" flex flex-col">
+        <header className='flex justify-between'>
+          <div className=' flex w-2/5 justify-start h-20'>
+            <img
+              src={ triforce }
+              alt='triforce'
+              className='mr-4 '
+            />
+            <p className='text-5xl self-center title text-login'>HYLIAN WALLET</p>
+          </div>
+          <div className='flex self-center w-1/3 justify-around'>
+
+            <p data-testid="header-currency-field" className='text-white'>
+              TOTAL:
+              {' '}
+              R$
+              {' '}
+              {parseFloat(this.somaTotal()).toFixed(2)}
+            </p>
+            <p data-testid="email-field" className='mr-4 text-white'>{ email }</p>
+          </div>
+
         </header>
-        <form>
-          <label htmlFor="valueinput">
-            Valor:
+        <form
+          className='
+          formInput rounded-b-lg
+          flex justify-around items-center
+        h-24'
+
+        >
+          <label htmlFor="valueinput" className='flex flex-col'>
+            Cost:
             <input
               type="text"
               name="valueinput"
               data-testid="value-input"
               onChange={ this.handleChange }
               value={ valueinput }
+              className='rounded-md p-1'
+              placeholder='Type Here...'
+
             />
           </label>
-          <label htmlFor="descriptioninput">
-            Descrição:
+          <label htmlFor="descriptioninput" className='flex flex-col'>
+            Description:
             <input
               type="text"
               name="descriptioninput"
               data-testid="description-input"
               onChange={ this.handleChange }
               value={ descriptioninput }
+              className='rounded-md p-1'
+              placeholder='Type Here...'
+              maxLength={ 20 }
+
             />
           </label>
-          <label htmlFor="currencies">
-            Moeda
+          <label htmlFor="currencies" className='flex flex-col'>
+            Currency:
             <select
               name="cambio"
               id="currencies"
               value={ cambio }
               onChange={ this.handleChange }
+              className='rounded-md p-1 bg-white'
+
             >
               {currencies.map((currencie) => (
                 <option key={ currencie } value={ currencie }>
@@ -134,47 +169,54 @@ class Wallet extends React.Component {
                 </option>))}
             </select>
           </label>
-          <label htmlFor="pagamento">
-            Pagamento:
+          <label htmlFor="pagamento" className='flex flex-col'>
+            Payment:
             <select
               data-testid="method-input"
               id="pagamento"
               name="pagamento"
               onChange={ this.handleChange }
               value={ pagamento }
+              className='rounded-md p-1 bg-white'
+
             >
               <option>Dinheiro</option>
               <option>Cartão de crédito</option>
               <option>Cartão de débito</option>
             </select>
           </label>
-          <label htmlFor="categories">
-            Categoria:
+          <label htmlFor="categories" className='flex flex-col'>
+            Category:
             <select
               id="categories"
               data-testid="tag-input"
               name="pagamentocategories"
               onChange={ this.handleChange }
               value={ pagamentocategories }
+              className='rounded-md p-1 bg-white'
+
             >
-              <option>Alimentação</option>
+              <option>Food</option>
               <option>Lazer</option>
-              <option>Trabalho</option>
-              <option>Transporte</option>
-              <option>Saúde</option>
+              <option>Work</option>
+              <option>Transport</option>
+              <option>Health</option>
             </select>
           </label>
-          {editor ? (
-            <button type="button" onClick={ this.dispatchEdit }>
-              Editar despesa
-            </button>)
-            : (
-              <button type="button" onClick={ this.dispatchExpenses }>
-                Adicionar despesa
-              </button>)}
+
+          <button
+            type="button"
+            onClick={ editor ? this.dispatchEdit : this.dispatchExpenses }
+            className='button-form'
+          >
+            <img
+              src={ addIcon }
+              alt='Add-Icon'
+            />
+          </button>
         </form>
         <Table editItem={ this.editItem } />
-      </>
+      </div>
     );
   }
 }

@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import saveUserEmail from '../actions';
 import triforce from '../images/triforce.png';
 import rupee from '../images/rupee.png';
@@ -12,7 +11,6 @@ class Login extends React.Component {
     email: '',
     password: '',
     disabledButton: true,
-    redirect: false,
   }
 
   handleChange = (e) => {
@@ -31,12 +29,13 @@ class Login extends React.Component {
   }
 
   redirectWallet = () => {
-    this.setState({ redirect: true });
+    const { history } = this.props;
+    history.push('./carteira');
   }
 
   render() {
     const { submitEmail } = this.props;
-    const { email, disabledButton, redirect } = this.state;
+    const { email, disabledButton } = this.state;
 
     return (
       <div className='flex'>
@@ -59,8 +58,8 @@ class Login extends React.Component {
             self-center
             '
           >
-            <p className='text-7xl'>MY RUPEES,</p>
-            <p className='text-8xl'>MY PROBLEMS</p>
+            <p className='text-7xl text-login'>MY RUPEES,</p>
+            <p className='text-8xl text-login'>MY PROBLEMS</p>
           </div>
           <div className='absolute bottom-4 left-0'>
 
@@ -74,7 +73,7 @@ class Login extends React.Component {
         <form className='w-1/2 h-screen flex flex-col justify-center'>
           <div>
 
-            <p className='text-6xl text-center title'>HYLIAN WALLET</p>
+            <p className='text-6xl text-center title text-login'>HYLIAN WALLET</p>
           </div>
           <div className='flex justify-center'>
             <img
@@ -97,6 +96,7 @@ class Login extends React.Component {
                 data-testid="email-input"
                 onChange={ this.handleChange }
                 placeholder="Login"
+                className='input-login'
               />
 
             </div>
@@ -109,6 +109,7 @@ class Login extends React.Component {
                 minLength={ 6 }
                 onChange={ this.handleChange }
                 placeholder="Password"
+                className='input-login'
               />
 
             </div>
@@ -117,13 +118,12 @@ class Login extends React.Component {
               <button
                 disabled={ disabledButton }
                 type="button"
-                className='bg-white rounded-xl w-full p-2'
+                className='button-login cursor-pointer rounded-xl w-full p-2'
                 onClick={ () => { submitEmail(email); this.redirectWallet(); } }
               >
                 Entrar
               </button>
             </div>
-            { redirect && <Redirect to="/carteira" /> }
           </div>
         </form>
       </div>
@@ -133,6 +133,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   submitEmail: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
