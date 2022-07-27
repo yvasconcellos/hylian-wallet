@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
 
 body {
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(255, 255, 255);
 }
 
 header {
@@ -24,13 +24,12 @@ header {
 
 .text-login {
   font-family: 'Megrim', cursive;
-  text-shadow:rgb(31, 31, 31) -1px 1px 7px
+  font-weight:500;
+  text-shadow:rgb(155, 154, 154) -1px 1px 7px
 }
 
 .button-login {
-  background-color: #474747;
   transition: 0.7s;
-  color: white;
 }
 
 .button-login:hover {
@@ -48,12 +47,12 @@ header {
 }
 
 .title {
-  color: #fde5a3;
+  color: #fad674;
   
 }
 
 .input-login {
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(255, 255, 255);
   border-bottom: 1px solid rgb(121, 121, 121);
 }
 
