@@ -1,4 +1,4 @@
-@import url('http://fonts.cdnfonts.com/css/handjet-2');
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
 
 body {
   background-color: rgb(243, 243, 243);
@@ -23,9 +23,8 @@ header {
 }
 
 .text-login {
-  font-family: 'Handjet', sans-serif;
-  text-shadow:rgb(66, 66, 66) -1px 1px 7px
-
+  font-family: 'Megrim', cursive;
+  text-shadow:rgb(31, 31, 31) -1px 1px 7px
 }
 
 .button-login {
