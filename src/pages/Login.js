@@ -57,8 +57,8 @@ class Login extends React.Component {
             self-center
             "
           >
-            <p className="text-7xl text-login ">MY RUPEES,</p>
-            <p className="text-8xl text-login ">MY PROBLEMS</p>
+            <p className="text-6xl text-login ">MY RUPEES,</p>
+            <p className="text-7xl text-login ">MY PROBLEMS</p>
           </div>
           <div className="absolute bottom-4 left-0">
 
@@ -72,7 +72,7 @@ class Login extends React.Component {
         <form className="w-1/2 h-screen flex flex-col justify-center">
           <div>
 
-            <p className="text-6xl text-center title text-login">HYLIAN WALLET</p>
+            <p className="text-5xl text-center title text-login">HYLIAN WALLET</p>
           </div>
           <div className="flex justify-center">
             <img
@@ -118,7 +118,11 @@ class Login extends React.Component {
               <button
                 disabled={ disabledButton }
                 type="button"
-                className="button-login cursor-pointer rounded-xl w-full p-2"
+                className="button-login
+                text-white
+                cursor-pointer
+                bg-slate-800
+                rounded-xl w-full p-2"
                 onClick={ () => { submitEmail(email); this.redirectWallet(); } }
               >
                 Login

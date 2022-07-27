@@ -106,7 +106,7 @@ class Wallet extends React.Component {
               alt='triforce'
               className='mr-4 '
             />
-            <p className='text-5xl self-center title text-login'>HYLIAN WALLET</p>
+            <p className='text-4xl self-center title text-login'>HYLIAN WALLET</p>
           </div>
           <div className='flex self-center w-1/3 justify-around'>
 
