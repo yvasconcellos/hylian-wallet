@@ -6,6 +6,8 @@ import { editExpense, fetchAPI, getCurrencies, getEdit, getExpenses } from '../a
 import Table from './Table';
 import triforce from '../images/triforce.png';
 import addIcon from '../images/icon-add.png';
+import logout from '../images/logout.png';
+import Footer from '../components/Footer';
 
 const alimentacao = 'Food';
 
@@ -91,7 +93,7 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { email, currencies, editor } = this.props;
+    const { email, currencies, editor, history } = this.props;
     const { cambio, valueinput,
       descriptioninput, pagamento,
       pagamentocategories } = this.state;
@@ -116,8 +118,14 @@ class Wallet extends React.Component {
               {parseFloat(this.somaTotal()).toFixed(2)}
             </p>
             <p data-testid="email-field" className='mr-4 text-white'>{ email }</p>
+            <button
+              type='button'
+              className='button-form'
+              onClick={ () => history.push('./') }
+            >
+              <img src={ logout } alt='logout' />
+            </button>
           </div>
-
         </header>
         <form
           className='
@@ -180,9 +188,9 @@ class Wallet extends React.Component {
               className='rounded-md p-1 bg-white'
 
             >
-              <option>Dinheiro</option>
-              <option>Cartão de crédito</option>
-              <option>Cartão de débito</option>
+              <option>Cash</option>
+              <option>Credit Card</option>
+              <option>Debit Card</option>
             </select>
           </label>
           <label htmlFor="categories" className='flex flex-col'>
@@ -197,7 +205,7 @@ class Wallet extends React.Component {
 
             >
               <option>Food</option>
-              <option>Lazer</option>
+              <option>Wellness</option>
               <option>Work</option>
               <option>Transport</option>
               <option>Health</option>
@@ -216,6 +224,7 @@ class Wallet extends React.Component {
           </button>
         </form>
         <Table editItem={ this.editItem } />
+        <Footer />
       </div>
     );
   }
@@ -227,6 +236,7 @@ Wallet.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   editor: PropTypes.bool.isRequired,
+  history: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

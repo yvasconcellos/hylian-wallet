@@ -1,4 +1,3 @@
-/* eslint-disable jsx-quotes */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -38,48 +37,48 @@ class Login extends React.Component {
     const { email, disabledButton } = this.state;
 
     return (
-      <div className='flex'>
+      <div className="flex">
 
         <div
-          className='
+          className="
         flex
         flex-col
         bgSide
         w-1/2
         h-screen
         justify-center
-        '
+        "
         >
           <div
-            className='
+            className="
             paragraph
             text-white
             justify-center
             self-center
-            '
+            "
           >
-            <p className='text-7xl text-login'>MY RUPEES,</p>
-            <p className='text-8xl text-login'>MY PROBLEMS</p>
+            <p className="text-7xl text-login ">MY RUPEES,</p>
+            <p className="text-8xl text-login ">MY PROBLEMS</p>
           </div>
-          <div className='absolute bottom-4 left-0'>
+          <div className="absolute bottom-4 left-0">
 
             <img
-              className='w-1/6'
+              className="w-1/6"
               src={ rupee }
-              alt='rupee'
+              alt="rupee"
             />
           </div>
         </div>
-        <form className='w-1/2 h-screen flex flex-col justify-center'>
+        <form className="w-1/2 h-screen flex flex-col justify-center">
           <div>
 
-            <p className='text-6xl text-center title text-login'>HYLIAN WALLET</p>
+            <p className="text-6xl text-center title text-login">HYLIAN WALLET</p>
           </div>
-          <div className='flex justify-center'>
+          <div className="flex justify-center">
             <img
               src={ triforce }
-              alt='triforce'
-              className='w-1/4'
+              alt="triforce"
+              className="w-1/4"
             />
           </div>
           <div
@@ -95,8 +94,8 @@ class Login extends React.Component {
                 type="text"
                 data-testid="email-input"
                 onChange={ this.handleChange }
-                placeholder="Login"
-                className='input-login'
+                placeholder="Email"
+                className="input-login"
               />
 
             </div>
@@ -109,7 +108,8 @@ class Login extends React.Component {
                 minLength={ 6 }
                 onChange={ this.handleChange }
                 placeholder="Password"
-                className='input-login'
+                className="input-login"
+                min={ 6 }
               />
 
             </div>
@@ -118,10 +118,10 @@ class Login extends React.Component {
               <button
                 disabled={ disabledButton }
                 type="button"
-                className='button-login cursor-pointer rounded-xl w-full p-2'
+                className="button-login cursor-pointer rounded-xl w-full p-2"
                 onClick={ () => { submitEmail(email); this.redirectWallet(); } }
               >
-                Entrar
+                Login
               </button>
             </div>
           </div>
